@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Memory Birthday</string>
+
+    <string name="settingsLabel">Настройки</string>
+    <string name="aboutLabel">О приложении</string>
+    <string name="shareFriends">Рассказать друзьям</string>
+</resources>
