@@ -1,12 +1,13 @@
 package ru.bfu.malenkov.eventreminder.ui
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import ru.bfu.malenkov.eventreminder.R
 import ru.bfu.malenkov.eventreminder.databinding.ActivityMainBinding
-import ru.bfu.malenkov.eventreminder.ui.profile.ProfileActivity
+import ru.bfu.malenkov.eventreminder.ui.event.EventsFragment
+import ru.bfu.malenkov.eventreminder.ui.holiday.HolidaysFragment
+import ru.bfu.malenkov.eventreminder.ui.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,8 +19,27 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        binding.profileBtn.setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
+        if (savedInstanceState == null) updateMainContent(EventsFragment())
+
+        initNavigation()
+    }
+
+    private fun initNavigation() {
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.bottomMenuEvents  -> updateMainContent(EventsFragment())
+                R.id.bottomMenuHoliday -> updateMainContent(HolidaysFragment())
+                R.id.bottomMenuProfile -> updateMainContent(ProfileFragment())
+                else                   -> false
+            }
         }
+    }
+
+    private fun updateMainContent(newFragment: Fragment): Boolean {
+        val tag = newFragment::class.java.name
+        supportFragmentManager.beginTransaction()
+            .replace(binding.mainContent.id, newFragment, tag)
+            .commit()
+        return true
     }
 }

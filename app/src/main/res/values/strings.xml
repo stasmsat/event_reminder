@@ -6,4 +6,8 @@
 
     <string name="shareFriends">Share friends</string>
     <string name="shareDescription">Great app!!!</string>
+
+    <string name="bottomMenu_events">Events</string>
+    <string name="bottomMenu_holidays">Holidays</string>
+    <string name="bottomMenu_profile">Profile</string>
 </resources>
