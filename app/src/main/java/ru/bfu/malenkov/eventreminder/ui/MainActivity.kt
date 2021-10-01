@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ru.bfu.malenkov.eventreminder.R
 import ru.bfu.malenkov.eventreminder.databinding.ActivityMainBinding
+import ru.bfu.malenkov.eventreminder.ui.common.LogLifecycle
 import ru.bfu.malenkov.eventreminder.ui.event.EventsFragment
 import ru.bfu.malenkov.eventreminder.ui.holiday.HolidaysFragment
 import ru.bfu.malenkov.eventreminder.ui.profile.ProfileFragment
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        LogLifecycle(lifecycle, "MainActivity")
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
