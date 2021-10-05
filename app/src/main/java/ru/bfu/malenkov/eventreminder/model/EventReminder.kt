@@ -1,3 +1,9 @@
 package ru.bfu.malenkov.eventreminder.model
 
-data class EventReminder(val title: String) 
+import java.util.*
+
+data class EventReminder(
+    val title: String,
+    val desc: String,
+    val dateStart: Date
+)
