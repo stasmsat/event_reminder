@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.bfu.malenkov.eventreminder.databinding.ItemEventReminderVhBinding
-import ru.bfu.malenkov.eventreminder.model.EventReminder
+import ru.bfu.malenkov.eventreminder.domain.model.EventReminder
 
 internal class EventsAdapter : RecyclerView.Adapter<EventVH>() {
 

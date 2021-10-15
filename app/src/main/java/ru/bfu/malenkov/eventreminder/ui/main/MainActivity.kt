@@ -1,6 +1,7 @@
-package ru.bfu.malenkov.eventreminder.ui
+package ru.bfu.malenkov.eventreminder.ui.main
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ru.bfu.malenkov.eventreminder.R
@@ -13,6 +14,7 @@ import ru.bfu.malenkov.eventreminder.ui.profile.ProfileFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val mainVM: MainVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,13 +29,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initNavigation() {
-        binding.bottomNavigation.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.bottomMenuEvents  -> updateMainContent(EventsFragment())
-                R.id.bottomMenuHoliday -> updateMainContent(HolidaysFragment())
-                R.id.bottomMenuProfile -> updateMainContent(ProfileFragment())
-                else                   -> false
+        binding.bottomNavigation.apply {
+            setOnItemSelectedListener {
+                mainVM.saveCurrentMenuId(it.itemId)
+                when (it.itemId) {
+                    R.id.bottomMenuEvents  -> updateMainContent(EventsFragment())
+                    R.id.bottomMenuHoliday -> updateMainContent(HolidaysFragment())
+                    R.id.bottomMenuProfile -> updateMainContent(ProfileFragment())
+                    else                   -> false
+                }
             }
+            selectedItemId = mainVM.getLastMenuId()
         }
     }
 

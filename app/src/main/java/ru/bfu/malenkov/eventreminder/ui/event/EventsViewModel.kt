@@ -1,14 +1,22 @@
 package ru.bfu.malenkov.eventreminder.ui.event
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import ru.bfu.malenkov.eventreminder.model.EventReminder
-import java.util.*
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import ru.bfu.malenkov.eventreminder.data.db.AppDatabase
+import ru.bfu.malenkov.eventreminder.data.repository.EventReminderRepositoryDb
+import ru.bfu.malenkov.eventreminder.domain.model.EventReminder
+import java.time.LocalDate
 
-class EventsViewModel : ViewModel() {
+class EventsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val eventsReminder: MutableLiveData<List<EventReminder>> = MutableLiveData()
+    private val eventReminderRepository = EventReminderRepositoryDb(
+        database = AppDatabase.getInstance(getApplication())
+    )
 
     init {
         loadEventsReminder()
@@ -19,11 +27,9 @@ class EventsViewModel : ViewModel() {
     }
 
     private fun loadEventsReminder() {
-        val list = listOf(
-            EventReminder("День рождение Андрея", "Нужно поздравить с утра", Date()),
-            EventReminder("День рождение Виктора", "Длинное описание. Ооооочень длииннное описание события. Ну оооооочень длинное описание ", Date()),
-            EventReminder("День группы", "", Date()),
-        )
-        eventsReminder.postValue(list)
+        viewModelScope.launch {
+            eventsReminder.value = eventReminderRepository.getEventReminderList()
+        }
+
     }
 }

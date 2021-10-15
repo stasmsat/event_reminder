@@ -3,7 +3,7 @@ package ru.bfu.malenkov.eventreminder.ui.event.adapter
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import ru.bfu.malenkov.eventreminder.databinding.ItemEventReminderVhBinding
-import ru.bfu.malenkov.eventreminder.model.EventReminder
+import ru.bfu.malenkov.eventreminder.domain.model.EventReminder
 import java.text.SimpleDateFormat
 import java.util.*
 

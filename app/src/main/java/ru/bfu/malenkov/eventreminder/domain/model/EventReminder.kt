@@ -1,4 +1,4 @@
-package ru.bfu.malenkov.eventreminder.model
+package ru.bfu.malenkov.eventreminder.domain.model
 
 import java.util.*
 
