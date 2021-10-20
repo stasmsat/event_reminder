@@ -14,14 +14,18 @@ class EventDescriptionVM(application: Application) : AndroidViewModel(applicatio
     private val eventReminderData: MutableLiveData<EventReminder> = MutableLiveData()
 
     fun getEventReminder(): LiveData<EventReminder> = eventReminderData
+    //TODO: Добавить переменную
+    // val titleObs = ObservableField("")
+    // var eventReminder: EventReminder? = null
 
     fun loadData(eventId: Int) {
         viewModelScope.launch {
             val event = getApplication<App>().eventReminderRepository.getEventReminder(eventId)
             eventReminderData.value = event
             //TODO Связать данную VM с fragment_event_desc
-
             //TODO Добавить в xml данные о деталях события и дату
+            //TODO: Установить значения в переменные titleObs и eventReminder
+
         }
     }
 

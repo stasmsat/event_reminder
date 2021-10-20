@@ -32,6 +32,7 @@ class EventDescriptionFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentEventDescBinding.inflate(inflater, container, false)
+        // TODO: Привязать EventDescriptionVM к binding
         return binding.root
     }
 
@@ -42,9 +43,6 @@ class EventDescriptionFragment : BaseFragment() {
         binding.apply {
             eventDescToolbar.setNavigationOnClickListener { mainRouter.back() }
         }
-
-        //TODO Удалить подписку после прямой связи VM с xml
-        eventDescriptionVM.getEventReminder().observe(viewLifecycleOwner, ::fillData)
 
         initMenu()
     }
@@ -58,12 +56,6 @@ class EventDescriptionFragment : BaseFragment() {
                 }
             }
             true
-        }
-    }
-
-    private fun fillData(eventReminder: EventReminder) {
-        with(binding) {
-            eventDescTitle.text = eventReminder.title
         }
     }
 
