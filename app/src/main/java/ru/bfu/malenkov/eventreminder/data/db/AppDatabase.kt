@@ -11,7 +11,7 @@ import ru.bfu.malenkov.eventreminder.data.db.helpers.DateConverter
 import ru.bfu.malenkov.eventreminder.data.db.model.EventReminderDb
 import ru.bfu.malenkov.eventreminder.data.worker.InitialDataDatabaseWorker
 
-@Database(entities = [EventReminderDb::class], version = 1)
+@Database(entities = [EventReminderDb::class], version = 2)
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun eventReminderDao(): EventReminderDao

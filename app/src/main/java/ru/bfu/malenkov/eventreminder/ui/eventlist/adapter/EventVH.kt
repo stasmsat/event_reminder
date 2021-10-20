@@ -1,9 +1,9 @@
-package ru.bfu.malenkov.eventreminder.ui.event.adapter
+package ru.bfu.malenkov.eventreminder.ui.eventlist.adapter
 
 import android.view.View
+import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
 import ru.bfu.malenkov.eventreminder.databinding.ItemEventReminderVhBinding
-import ru.bfu.malenkov.eventreminder.domain.model.EventReminder
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -11,12 +11,12 @@ internal class EventVH(private val binding: ItemEventReminderVhBinding) : Recycl
 
     private val simpleDateFormat = SimpleDateFormat("dd MMMM yyyy hh:mm", Locale.getDefault())
 
-    fun bind(eventReminder: EventReminder) {
+    fun bind(eventReminderVM: EventReminderVM) {
+        val eventReminder = eventReminderVM.data
         binding.apply {
+            setVariable(BR.viewModel, eventReminderVM)
             itemEventReminderDesc.visibility = if (eventReminder.desc.isBlank()) View.GONE else View.VISIBLE
 
-            itemEventReminderTitle.text = eventReminder.title
-            itemEventReminderDesc.text = eventReminder.desc
             itemEventReminderDate.text = simpleDateFormat.format(eventReminder.dateStart)
         }
     }
