@@ -19,6 +19,9 @@ class EventDescriptionVM(application: Application) : AndroidViewModel(applicatio
         viewModelScope.launch {
             val event = getApplication<App>().eventReminderRepository.getEventReminder(eventId)
             eventReminderData.value = event
+            //TODO Связать данную VM с fragment_event_desc
+
+            //TODO Добавить в xml данные о деталях события и дату
         }
     }
 

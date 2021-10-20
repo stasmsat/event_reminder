@@ -42,12 +42,19 @@ class EventEditFragment : BaseFragment() {
         id?.let(eventEditVM::loadData)
 
         initToolbar()
+        initDatePicker()
     }
 
     private fun initToolbar() {
         binding.apply {
             eventEditToolbar.setNavigationOnClickListener { mainRouter.back() }
         }
+    }
+
+    private fun initDatePicker() {
+        //TODO Добавить реализацию datePicker https://material.io/components/date-pickers/android
+
+        //TODO Сохранить выбранную дату в ViewModel
     }
 
     override fun onDestroyView() {

@@ -43,6 +43,7 @@ class EventDescriptionFragment : BaseFragment() {
             eventDescToolbar.setNavigationOnClickListener { mainRouter.back() }
         }
 
+        //TODO Удалить подписку после прямой связи VM с xml
         eventDescriptionVM.getEventReminder().observe(viewLifecycleOwner, ::fillData)
 
         initMenu()
