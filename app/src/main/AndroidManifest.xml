@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name=".ui.common.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +14,7 @@
         android:theme="@style/Theme.MemoryBirthday">
 
         <activity
-            android:name="ru.bfu.malenkov.eventreminder.ui.MainActivity"
+            android:name="ru.bfu.malenkov.eventreminder.ui.main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.MemoryBirthday.NoActionBar"
             android:exported="true">
@@ -26,16 +27,12 @@
         <activity
             android:name="ru.bfu.malenkov.eventreminder.ui.profile.AboutActivity"
             android:label="@string/aboutLabel"
-            android:parentActivityName="ru.bfu.malenkov.eventreminder.ui.profile.ProfileActivity"/>
+            android:parentActivityName=".ui.main.MainActivity"/>
 
         <activity
             android:name="ru.bfu.malenkov.eventreminder.ui.profile.SettingsActivity"
             android:label="@string/settingsLabel"
-            android:parentActivityName="ru.bfu.malenkov.eventreminder.ui.profile.ProfileActivity"/>
-
-        <activity
-            android:name="ru.bfu.malenkov.eventreminder.ui.profile.ProfileActivity"
-            android:theme="@style/Theme.MemoryBirthday.NoActionBar"/>
+            android:parentActivityName=".ui.main.MainActivity"/>
     </application>
 
 </manifest>
