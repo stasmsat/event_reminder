@@ -1,9 +1,8 @@
 package ru.bfu.malenkov.eventreminder.ui.eventdesc
 
 import android.app.Application
+import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.bfu.malenkov.eventreminder.domain.model.EventReminder
@@ -11,27 +10,21 @@ import ru.bfu.malenkov.eventreminder.ui.common.App
 
 class EventDescriptionVM(application: Application) : AndroidViewModel(application) {
 
-    private val eventReminderData: MutableLiveData<EventReminder> = MutableLiveData()
-
-    fun getEventReminder(): LiveData<EventReminder> = eventReminderData
-    //TODO: Добавить переменную
-    // val titleObs = ObservableField("")
-    // var eventReminder: EventReminder? = null
+    private var eventReminder: EventReminder? = null
+    val titleObs = ObservableField("")
 
     fun loadData(eventId: Int) {
         viewModelScope.launch {
-            val event = getApplication<App>().eventReminderRepository.getEventReminder(eventId)
-            eventReminderData.value = event
-            //TODO Связать данную VM с fragment_event_desc
-            //TODO Добавить в xml данные о деталях события и дату
-            //TODO: Установить значения в переменные titleObs и eventReminder
-
+            eventReminder = getApplication<App>().eventReminderRepository.getEventReminder(eventId)
+            eventReminder?.run {
+                titleObs.set(title)
+            }
         }
     }
 
     fun removeEvent() {
         viewModelScope.launch {
-            eventReminderData.value?.let {
+            eventReminder?.let {
                 getApplication<App>().eventReminderRepository.removeEventReminder(it)
             }
             closeView()
@@ -39,7 +32,7 @@ class EventDescriptionVM(application: Application) : AndroidViewModel(applicatio
     }
 
     fun editEvent() {
-        getApplication<App>().mainRouter.showEventEditScreen(eventReminderData.value?.id ?: -1)
+        getApplication<App>().mainRouter.showEventEditScreen(eventReminder?.id ?: -1)
     }
 
     private fun closeView() {

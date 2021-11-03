@@ -31,8 +31,10 @@ class EventDescriptionFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentEventDescBinding.inflate(inflater, container, false)
-        // TODO: Привязать EventDescriptionVM к binding
+        _binding = FragmentEventDescBinding.inflate(inflater, container, false).apply {
+            viewModel = eventDescriptionVM
+        }
+
         return binding.root
     }
 
